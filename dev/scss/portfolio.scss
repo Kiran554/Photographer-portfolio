@@ -1,0 +1,212 @@
+/*
+------------------------------------------------------------------
+Content
+------------------------------------------------------------------
+*/
+
+#content {
+  transition: opacity 0.3s ease-out;
+}
+
+#content.is_loading { opacity: 0; -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"; }
+
+body.simple #content {
+  max-width: 1140px;
+  margin: 0 auto;
+  width: 90%;
+}
+
+body.simple.blog #content {
+  width: 100%;
+  margin: 0 auto;
+}
+
+body.simple.blog #content iframe {
+  max-width: 100%;
+}
+
+@media screen and (max-width: 767px) {
+  body.simple.blog #content {
+    width: calc(100% - 40px);
+  }
+  body.simple.blog #content iframe {
+    height: calc(100vw / 2);
+  }
+}
+
+.f_blog_wrapper { margin: 0 auto; }
+@media screen and (max-width: 767px) {
+  .f_blog_wrapper {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+
+/* Desktop */
+@media screen and (min-width: 768px) {
+  body.gallery {
+    margin-right: 3%;
+  }
+  body.gallery #content {
+    box-sizing: border-box;
+    /* 90px is width of thumb bar */
+    margin-right: 90px;
+  }
+
+  #content .asset {
+    display: table;
+    height: 80vh;
+    table-layout: fixed; /* needed for fixing Firefox */
+    width: 80vw;
+  }
+
+  #content .asset_center {
+    box-sizing: border-box;
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+  }
+}
+
+
+#content .asset_text_container {
+  max-width: 40em;
+  margin: 0 auto;
+  text-align: left;
+  color: #666;
+font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+font-size: 14px;
+line-height: 1.2;
+}
+
+.asset_image_container {
+  max-width: 100%;
+  margin: 0 auto;
+  display: inline-block;
+}
+
+.asset_image_container img {
+  transition: all 0.3s ease-out;
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+}
+
+.asset.is_loading img { opacity: 0; -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)"; }
+
+
+@media screen and (max-width: 767px) {
+  body.gallery #content {
+    margin: 0 auto;
+  }
+  #content .asset {
+    padding:  1em 0;
+    min-height: 100px; /* dont scale to full viewport height like on desktop */
+  }
+  .asset_image_container {
+    max-width: 70%;
+    display: block;
+    margin: 0;
+  }
+  .asset_image_container img {
+    margin: 0 auto;
+  }
+}
+
+@media screen and (max-width: 479px) { 
+  .asset_image_container {
+    max-width: 65%;
+    display: block;
+    margin: 0;
+  }
+}
+
+/* ------------ Thumbnails bar ------------ */
+
+.gallery_thumbs {
+  transition: opacity 0.7s ease-out;
+  font-family: Helvetica, Arial, sans-serif;
+  margin: 10rem 0;
+  outline: 0;
+  opacity: 1;
+  padding: 5px 2rem 0 2rem;
+  position: fixed;
+  right: 3%;
+  top: 0;
+  height: 75%;
+  width: 120px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-perspective: 1000;
+  perspective: 1000;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.gallery_thumbs.is_loading {
+  opacity: 0;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+}
+
+
+.gallery_thumbs li {
+  transition: opacity 0.4s ease-out;
+  display: block;
+  list-style-type: none;
+  padding: 0 0 15px 0;
+  font-size: 12px;
+  line-height: 12px;
+  opacity: 0.1;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=10)";
+}
+
+.gallery_thumbs li:hover {
+  opacity: 0.5;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+}
+
+.gallery_thumbs li.is_selected {
+  opacity: 1;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+}
+
+
+  .gallery_thumbs li.is_selected img,
+  .gallery_thumbs li.txt.is_selected a {
+    outline: solid 1px #ffffff;
+    outline-offset: 3px;
+  }
+
+
+.gallery_thumbs li.is_loading {
+  opacity: 0;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+}
+
+.gallery_thumbs li img {
+  -ms-interpolation-mode: bicubic;
+  display: block;
+  width: 100%;
+}
+
+.gallery_thumbs li a { display: block; }
+
+.gallery_thumbs li.txt a {
+  box-sizing: border-box;
+  background: #555555;
+  color: #111111;
+  display: block;
+  font-family: verdana, arial, sans-serif;
+  font-size: 10px;
+  height: 70px;
+  overflow: hidden;
+  padding: 9px;
+  text-decoration: none;
+  width: 100%;
+}
+
+@media screen and (max-width: 479px) { 
+  .gallery_thumbs {
+    height: 70%;
+  }
+}

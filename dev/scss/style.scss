@@ -1,0 +1,320 @@
+@mixin horizontal-translate($time) {
+    -webkit-transition: all $time ease-in-out;
+    -moz-transition: all $time ease-in-out;
+    -ms-transition: all $time ease-in-out;
+    -o-transition: all $time ease-in-out;
+    transition: all $time ease-in-out;
+	margin-left: 100% !important;
+	transform: translate(-100%, 0);
+}
+
+body {
+	overflow-x: hidden;
+}
+
+$default-bg-color: rgba(17,17,17,1);
+
+@import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css);
+
+.header {
+
+    background-color: $default-bg-color;
+    font-weight: 200;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    opacity: 0.9;
+    z-index: 1;
+
+    &__logo {
+    	margin: 1rem;
+    }
+
+    &__logo {
+    	a {
+	    	color: #ccc;
+		    text-decoration: none;
+		    font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+		    font-style: normal;
+		    line-height: 1.3;
+		    font-size: 2.5rem;
+
+		    span {
+		    	color: #555;
+			    text-transform: uppercase;
+			    letter-spacing: 0.1em;
+			    font-size: 2rem;		    	
+		    }
+		}
+
+    }
+
+
+    &__nav {
+      font-size: 1.5rem;
+    }
+
+    &__nav-list {
+        list-style: none;
+        margin: 0;
+        padding-top: 1rem;
+        display: -webkit-box;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-flex-flow: row wrap;
+        flex-flow: row wrap;
+        justify-content: space-around;
+    }
+
+    &__nav-label {
+        display: none;
+    }
+
+    &__nav-label {
+        text-decoration: none;
+        padding: 1rem;
+        color: #aaa !important;
+        text-align: center;
+    }
+
+    &__nav-list a {
+        text-decoration: none;
+        display: block;
+        padding: 1.8rem;
+        color: #aaa !important;
+    }
+
+    &__nav-breadcrumb {
+        float: right;
+        font-size: 2.5rem;
+        padding: 2px;
+        cursor: pointer;
+        margin: 0 1rem;
+        font-weight: normal;
+    }
+  
+    &__nav-list a:hover{
+        color: #fff !important;
+    }
+
+    &__nav-icon {
+        font-size: 1.2rem;
+        padding-right: 5px;
+    }
+
+    &__dropdown {
+      position: relative;
+    }
+
+    &__dropdown-label {
+    	display: inherit;
+	    max-width: inherit;
+	    margin-bottom: inherit;
+	    font-weight: inherit;
+    }
+
+    &__dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      z-index: 1000;
+      display: none;
+      float: left;
+      padding: 5px 0;
+      font-size: 1.4rem;
+      min-width: 200px;
+      text-align: left;
+      list-style: none;
+      background-color: $default-bg-color;
+      -webkit-background-clip: padding-box;
+      background-clip: padding-box;
+      border: 1px solid #ccc;
+      border: 1px solid rgba(0,0,0,.15);
+      border-radius: 4px;
+      -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+      box-shadow: 0 6px 12px rgba(0,0,0,.175);
+    }
+
+    &__dropdown-menu a {
+      	padding: 1.2rem;
+    }
+
+    @media screen and (min-width: 768px){
+
+	    &__dropdown:hover > &__dropdown-menu {
+	      display: block;
+
+	    }
+
+	    &__dropdown:hover > &__dropdown-toggle {
+	      background-color: $default-bg-color !important;
+	    }
+    }
+
+    @media screen and (max-width: 479px) {
+    	&__logo {
+	    	a {
+			    font-size: 2rem;
+
+			    span {
+				    font-size: 1.5rem;		    	
+			    }
+			}
+
+	    }
+    }
+
+
+    @media screen and (max-width: 767px) {
+
+
+    	&__logo-col {
+    		position: absolute;
+    		z-index: 999;
+    	}
+
+    	&__nav-col {
+    		line-height: 2.8;
+    	}
+
+        &__nav-list {
+            -webkit-flex-flow: column wrap;
+            flex-flow: column wrap;
+            padding: 0;
+            display:none;
+            padding-top: 5rem;
+        }
+
+        &__nav-label {
+            display: block;
+        }
+
+        &__nav-open {
+        	display: none;
+        	font-weight: bold;
+        }
+
+        &__nav-checkbox:checked + &__nav-label > &__nav-close {
+            display: none;
+        }
+
+        &__nav-checkbox:checked + &__nav-label > &__nav-open {
+            display: block;
+        }
+
+        &__nav-checkbox:checked + &__nav-label + &__nav-list {
+            display: block;
+            max-height: 600px;
+        }
+
+        &__nav-list li {
+            border-bottom: 1px solid;
+        }
+
+        &__nav-list a {
+        	text-align: center;
+        	padding: 1.3rem;
+        }
+
+        &__nav-list-item:last-of-type {
+            border-bottom: none;
+        }
+
+        &__dropdown-menu {
+        	position: inherit;
+        	float: none;
+        	width: 50%;
+        	margin-left: 50%;
+        	margin-top: -30px;
+        	background-color: transparent;
+
+        	li {
+        		border: none;
+        	}
+
+        	a {
+        		text-align: left;
+        		padding: 0.2rem;
+        	}
+        }
+
+
+        &__dropdown-checkbox:checked + &__dropdown-label + &__dropdown-menu {
+            display: block;
+        }
+    }
+
+    @media screen and (max-width: 767px) and (orientation : landscape){
+
+    	overflow-x: hidden;
+    	overflow-y: auto;
+
+    	&__nav-checkbox:checked + &__nav-label + &__nav-list {
+            display: block;
+            max-height: 300px;
+        }
+    }
+}
+
+.mainContent {
+
+	padding-top: 10rem;
+	background-color: $default-bg-color;
+
+	.home {
+
+		&__list {
+			margin: auto !important;
+		}
+	}
+
+	.portfolio {
+
+		padding: 2px 2rem;
+
+		&__gallery {
+
+		}
+	}
+}
+
+.footer {
+
+	background-color: $default-bg-color;
+    font-weight: 200;
+    padding: 1rem 0;
+
+    &__copyright,
+    &__social-icons {
+    	color: #aaa;
+	    font-size: 1.5rem;
+	    text-align: center;
+    }
+
+    &__social-icons {
+
+    }
+
+    &__social-icons-list {
+    	list-style: none;
+    	padding: 0;
+    }
+
+    &__social-icon-item {
+    	display: inline;
+
+    	a {
+    		text-align: center;
+    		padding: 0 1.5rem;
+    		text-decoration: none;
+    		color: #aaa;
+    	}
+
+    	a:hover {
+    		color: #fff !important;
+    	}
+    }
+
+}
