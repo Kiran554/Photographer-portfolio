@@ -10,7 +10,7 @@ import {
   Link
 } from 'react-router-dom'
 
-console.log(process);
+//console.log(process);
 class MainContent extends Component {
 
 	constructor(props) {
@@ -32,6 +32,9 @@ class MainContent extends Component {
 	}
 
 	render() {
+		// Uncheked if checked before adding new content
+		$('#header-nav').is(':checked') && $('#header-nav').prop('checked',false);
+		
 		return (
 			<main className="mainContent"> 
 			 	<Route exact path="/" render={(props)=> <Home images={this.imageList} {...props}/>}/>
