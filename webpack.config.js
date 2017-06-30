@@ -12,6 +12,15 @@ module.exports = {
         port: 9000
     },
     devtool: isProduction ? '' : 'source-map',
+    resolve: {
+        alias: {
+            components:     path.resolve(__dirname, 'dev', 'js', 'components'),
+            containers:       path.resolve(__dirname, 'dev', 'js', 'containers'),
+            lib:           path.resolve(__dirname, 'dev', 'js', 'lib'),
+            scss:           path.resolve(__dirname, 'dev', 'scss')
+        },
+        extensions: ['', '.json', '.jsx', '.js']
+     },
     entry: './dev/js/index.js',
     module: {
         loaders: [

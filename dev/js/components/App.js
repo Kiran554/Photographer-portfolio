@@ -1,9 +1,9 @@
 import React from 'react';
-import Header from '../containers/Header';
-import MainContent from '../containers/Main-content';
-import Footer from '../containers/Footer';
+import Header from 'containers/Header';
+import MainContent from 'containers/Main-content';
+import Footer from 'containers/Footer';
 import 'bootstrap/dist/js/bootstrap';
-import '../lib/AnimOnScroll';
+import 'lib/AnimOnScroll';
 import {
   BrowserRouter as Router,
   Route,
@@ -11,7 +11,7 @@ import {
 } from 'react-router-dom'
 
 require('bootstrap/dist/css/bootstrap.css');
-require('../../scss/style.scss');
+require('scss/style.scss');
 
 const App = () => (
 	<Router>

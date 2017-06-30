@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import '../lib/Plugins';
-//import '../lib/Gallery';
+import 'lib/Plugins';
+//import 'lib/Gallery';
 
-require('../../scss/portfolio.scss');
+require('scss/portfolio.scss');
 
 class Portfolio extends Component {
 

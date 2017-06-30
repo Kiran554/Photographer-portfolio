@@ -148,9 +148,9 @@ class Header extends Component {
 		return (
 				<header className="header"> 
 					<div className="conatiner">
-						<div className="row header__row">
+						<div className="row header__row no-margin">
  
-							<div className="col-sm-4 col-xs-8 header__logo-col">
+							<div className="col-sm-4 col-xs-8 header__logo-col no-padding">
 								<div className="header__logo">
 									<Link to="/">
 										Sharath Modumpally
@@ -159,7 +159,7 @@ class Header extends Component {
 								</div>
 							</div>
 
-							<div className="col-sm-8 col-xs-12 header__nav-col">
+							<div className="col-sm-8 col-xs-12 header__nav-col no-padding">
 								<div className="header__nav">
 					                <input id="header-nav" className="header__nav-checkbox hide" type="checkbox" name="header-nav" />
 					                <label className="header__nav-label" htmlFor="header-nav">

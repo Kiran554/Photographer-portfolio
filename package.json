@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "webpack",
     "start": "webpack-dev-server --hot --inline",
-    "prod": "cross-env NODE_ENV=production node ./bin/www"
+    "prod": "cross-env NODE_ENV=production node ./bin/www",
+    "postinstall": "webpack -p"
   },
   "repository": {
     "type": "git",

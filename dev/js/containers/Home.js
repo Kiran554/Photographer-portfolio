@@ -7,7 +7,7 @@ import {
   Link
 } from 'react-router-dom'
 
-require('../../scss/home.scss');
+require('scss/home.scss');
 
 class Home extends Component {
 

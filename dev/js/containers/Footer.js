@@ -39,15 +39,15 @@ class Footer extends Component {
 	render() {
 		return (
 				<footer className="footer"> <div className="conatiner">
-						<div className="row footer__row">
+						<div className="row footer__row no-margin">
  
-							<div className="col-sm-6 col-xs-12 footer__copyright__col">
+							<div className="col-sm-6 col-xs-12 footer__copyright__col no-padding">
 								<div className="footer__copyright">
 									<p><em>All Images © Sharath Modumpally {new Date().getFullYear()}</em></p>
 								</div>
 							</div>
 
-							<div className="col-sm-6 col-xs-12 footer__socialmedia-col">
+							<div className="col-sm-6 col-xs-12 footer__socialmedia-col no-padding">
 								<div className="footer__social-icons">
 					                <ul className="footer__social-icons-list">
 					                    {this.constructFooterList()}
