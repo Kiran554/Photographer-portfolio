@@ -39,7 +39,7 @@ module.exports = {
     output: {
         path: path.join(__dirname, 'src'),
         filename: 'js/bundle.min.js',
-        publicPath: isProduction ? '/src/' : '/'
+        //publicPath: isProduction ? '/src/' : '/'
     },
     plugins: [
         new webpack.optimize.OccurrenceOrderPlugin(),
