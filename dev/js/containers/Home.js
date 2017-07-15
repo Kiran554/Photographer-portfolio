@@ -17,12 +17,12 @@ class Home extends Component {
 	}
 
 	componentWillMount() {
-
+		console.log(this.props);
 	}
 
 	componentDidMount() {
 		new AnimOnScroll( document.getElementById( 'grid' ), {
-				minDuration : 0.4,
+				minDuration : 0.1,
 				maxDuration : 0.7,
 				viewportFactor : 0.2
 			} );

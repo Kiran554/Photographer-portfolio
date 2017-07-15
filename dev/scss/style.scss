@@ -18,6 +18,14 @@ body {
 	padding: 0 !important;
 }
 
+.transition-wrapper {
+      position: relative;
+
+    & > div {
+    	transition: transform 0.3s ease-in-out;
+    }
+}
+
 $default-bg-color: rgba(17,17,17,1);
 
 @import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css);
@@ -32,6 +40,7 @@ $default-bg-color: rgba(17,17,17,1);
     width: 100%;
     opacity: 0.9;
     z-index: 1;
+    max-height: 70px;
 
     &__logo {
     	margin: 1rem;
@@ -294,6 +303,7 @@ $default-bg-color: rgba(17,17,17,1);
 	background-color: $default-bg-color;
     font-weight: 200;
     padding: 1rem 0;
+    max-height: 55px;
 
     &__copyright,
     &__social-icons {

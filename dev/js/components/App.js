@@ -7,19 +7,27 @@ import 'lib/AnimOnScroll';
 import {
   BrowserRouter as Router,
   Route,
-  Link
-} from 'react-router-dom'
+  Link,
+  Redirect
+} from 'react-router-dom';
 
 require('bootstrap/dist/css/bootstrap.css');
 require('scss/style.scss');
 
 const App = () => (
 	<Router>
-		<div className="">
-			<Header/>
-			<MainContent/>
-			<Footer/>
-		</div>
+		<Route render={({ location, history, match}) => (
+      		<div>
+		        <Route exact path="/" render={() => (
+		          <Redirect to="/"/>
+		        )}/>
+
+				<Header/>
+				<MainContent/>
+				<Footer/>
+
+			</div>
+    	)}/>
 	</Router>
 );
 
