@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import 'lib/Plugins';
-//import 'lib/Gallery';
+import 'lib/Gallery';
 
 require('scss/portfolio.scss');
 
@@ -18,9 +18,10 @@ class Portfolio extends Component {
 	}
 
 	componentDidMount() {
-		//Gallery.size_assets();
-		//Gallery.init.call(Gallery);
-        //Thumbs.init();
+		Gallery.cache_assets_dom_elements();
+		Gallery.size_assets();
+		Gallery.init.call(Gallery);
+        Thumbs.init();
 	}
 
 	constructGallery() {
@@ -46,7 +47,7 @@ class Portfolio extends Component {
 	constructThumbnail() {
 		return this.props.images.map((image, index) => {
 			return (
-				<li className="gallery_thumb image is_selected" key={`gallery-thumbnail-${index}`}>
+				<li className="gallery_thumb image is_selected" key={`gallery-thumbnail-${index}`} id={`thumb${index+1}`}>
 		        	<a href={`#no${index+1}`}>
 		        		<img className="js_lazyload" src={image} alt={image.split('.')[0]}/>
 	        		</a>

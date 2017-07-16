@@ -42,8 +42,10 @@ class MainContent extends Component {
 
 		return (
 			<main className="mainContent"> 
-			<Route location={location} key={location.key} exact path="/" render={(props)=> <Home images={this.imageList} {...props}/>}/>
-				<RouteTransition 
+				<Route location={location} key={location.key} exact path="/" render={(props)=> <Home images={this.imageList} {...props}/>}/>
+				<Route location={location} key={location.key}  path="/portfolio/:portfolioId" render={(props)=> <Portfolio images={this.imageList} {...props}/>}/>
+		      	<Route location={location} key={location.key}  path="/contact" component={Contact}/>
+				{/*<RouteTransition 
 			        pathname={location.pathname}
 			        className="transition-wrapper"
 			        {...presets.slideLeft}>
@@ -51,7 +53,7 @@ class MainContent extends Component {
 				      	<Route location={location} key={location.key}  path="/portfolio/:portfolioId" render={(props)=> <Portfolio images={this.imageList} {...props}/>}/>
 				      	<Route location={location} key={location.key}  path="/contact" component={Contact}/>
 			      	</Switch>
-			   	</RouteTransition>
+			   	</RouteTransition>*/}
 			 </main>
 			)
 	}

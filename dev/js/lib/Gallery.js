@@ -2,12 +2,10 @@ var MOBILE_BREAKPOINT = 768;
 var SCROLL_SPEED = 500;
 
 var Gallery = {
+	is_ie8: $('html').hasClass('ie8'),
     current: null,
-    is_ie8: $('html').hasClass('ie8'),
-    assets: $('#content .asset'),
-    assets_center: $('#content .asset_center'),
-    nav_next: $('.js_gallery_navigation .gallery_next'),
-    nav_prev: $('.js_gallery_navigation .gallery_prev'),
+    assets: null,
+    assets_center: null,
     images_and_captions: [], // used by Gallery.cache_assets_dom_elements()
     videos_and_captions: [], // used by Gallery.cache_assets_dom_elements()
 
@@ -17,6 +15,8 @@ var Gallery = {
     },
 
     init: function() {
+		Gallery.assets = $('#content .asset');
+		Gallery.assets_center = $('#content .asset_center')
         // set current from hash
         var current_item = $('#content .asset' + document.location.hash);
         Gallery.current = (current_item.length ? current_item : $('#no1'));
@@ -101,14 +101,6 @@ var Gallery = {
         setTimeout($.waypoints.bind(null, 'enable'), SCROLL_SPEED);
     },
 
-    // enables or disables gallery nav arrows, depending if we are at the end/beginning of gallery
-    update_navigation_status: function() {
-        var next = Gallery.current.next().length ? false : true;
-        var prev = Gallery.current.prev().length ? false : true;
-        this.nav_prev.attr('disabled', prev);
-        this.nav_next.attr('disabled', next);
-    },
-
     cache_assets_dom_elements: function() {
         // setup images_and_captions and videos_and_captions
         // so that they are cached, and not calculated every time
@@ -172,7 +164,6 @@ var Gallery = {
 
     set_current: function(item) {
         this.current = $(item);
-        this.update_navigation_status();
     },
 
     center_image: function() {
@@ -223,13 +214,15 @@ Thumbs.goTo = debounce(function(index) {
     if (!target.length) return false; // guard just in case target doesn't exist.
 
     var window_height = $.waypoints('viewportHeight');
-    var center_screen = window_height / 2 - target.height() / 2;
-    var new_scroll_postion = -(target.position().top - center_screen);
 
-    // better js animations than jquery defaults (uses requestAnimationFrame)
-    emile(this.container[0], "top:" + new_scroll_postion + "px", {
-        duration: 300
-    });
+    var center_screen = window_height / 2 - target.height() / 2;
+    var new_target_position = target.offset().top - Thumbs.container.offset().top + Thumbs.container.scrollTop();
+    var new_scroll_postion =   new_target_position - Thumbs.container.height()/2 - 10;
+    
+    Thumbs.container.animate({
+	        scrollTop: new_scroll_postion
+	    }, 500);
+
     this.elements.removeClass('is_selected');
     target.addClass('is_selected');
 }, 300);
@@ -238,9 +231,6 @@ Thumbs.goToCurrent = function() {
     var id = parseInt(Gallery.current[0].id.replace('no', ''), 10);
     Thumbs.goTo(id);
 };
-
-// run asap, dont wait for dom load
-Gallery.cache_assets_dom_elements();
 
 global.Gallery = Gallery;
 global.Thumbs = Thumbs;

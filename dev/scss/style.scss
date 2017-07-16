@@ -82,6 +82,7 @@ $default-bg-color: rgba(17,17,17,1);
         -webkit-flex-flow: row wrap;
         flex-flow: row wrap;
         justify-content: space-around;
+        background-color: $default-bg-color;
         @include translate(1s);
     }
 
