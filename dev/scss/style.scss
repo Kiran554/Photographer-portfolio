@@ -40,7 +40,6 @@ $default-bg-color: rgba(17,17,17,1);
     width: 100%;
     opacity: 0.9;
     z-index: 1;
-    max-height: 70px;
 
     &__logo {
     	margin: 1rem;
@@ -281,6 +280,7 @@ $default-bg-color: rgba(17,17,17,1);
 	padding-top: 10rem;
 	background-color: $default-bg-color;
 	min-height: 92vh;
+	position: relative;
 
 	.home {
 
@@ -294,7 +294,61 @@ $default-bg-color: rgba(17,17,17,1);
 		padding: 2px 2rem;
 
 		&__gallery {
+			pointer-events: none;
 
+			&--cover {
+				height: 92vh;
+				overflow: hidden;
+			}
+		}
+
+		&__gallery_thumbs {
+			margin-top: -200%;
+			background-color: $default-bg-color;
+			@include translate(1s);
+
+			&--show {
+				margin-top: 10rem;
+			}
+		}
+
+		&__cover {
+			left: 0;
+			bottom: 0;
+			right: 0;
+			top: 0;
+			position: absolute;
+			display: none;
+			background-color: $default-bg-color;
+			opacity: 0.7;
+			@include translate(1s);
+
+			&--show {
+				display: block;
+			}
+		}
+
+		&__shortcut {
+			position: fixed;
+			bottom: 20%;
+			border: 1px solid #555;
+			border-radius: 8px 0 0 8px;
+			color: $default-bg-color;
+			padding: 5px 10px;
+			background-color: #aaa;
+			right: 0;
+			font-size: 2.5rem;
+			margin-bottom: 0;
+			cursor: pointer;
+			@include translate(1s);
+
+			span {
+				padding: 0 5px;
+			}
+
+			&--hide {
+				margin-bottom: -100%;
+			}
 		}
 	}
 }
@@ -304,7 +358,6 @@ $default-bg-color: rgba(17,17,17,1);
 	background-color: $default-bg-color;
     font-weight: 200;
     padding: 1rem 0;
-    max-height: 55px;
 
     &__copyright,
     &__social-icons {

@@ -41,7 +41,7 @@ class MainContent extends Component {
 		$('#header-nav').is(':checked') && $('#header-nav').prop('checked',false);
 
 		return (
-			<main className="mainContent"> 
+			<main className="mainContent">
 				<Route location={location} key={location.key} exact path="/" render={(props)=> <Home images={this.imageList} {...props}/>}/>
 				<Route location={location} key={location.key}  path="/portfolio/:portfolioId" render={(props)=> <Portfolio images={this.imageList} {...props}/>}/>
 		      	<Route location={location} key={location.key}  path="/contact" component={Contact}/>
@@ -54,6 +54,7 @@ class MainContent extends Component {
 				      	<Route location={location} key={location.key}  path="/contact" component={Contact}/>
 			      	</Switch>
 			   	</RouteTransition>*/}
+
 			 </main>
 			)
 	}

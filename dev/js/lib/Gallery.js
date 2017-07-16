@@ -202,6 +202,9 @@ Thumbs.init = function() {
 };
 
 Thumbs.goTo = debounce(function(index) {
+
+	// Return false if thumbs is visible
+	if(Thumbs.container[0].className.includes('--show')) return false;
     // you can pass an object, or an id
     if (typeof index == 'object' && index !== null) {
         var target = index
@@ -218,7 +221,7 @@ Thumbs.goTo = debounce(function(index) {
     var center_screen = window_height / 2 - target.height() / 2;
     var new_target_position = target.offset().top - Thumbs.container.offset().top + Thumbs.container.scrollTop();
     var new_scroll_postion =   new_target_position - Thumbs.container.height()/2 - 10;
-    
+
     Thumbs.container.animate({
 	        scrollTop: new_scroll_postion
 	    }, 500);

@@ -104,7 +104,6 @@ line-height: 1.2;
     min-height: 100px; /* dont scale to full viewport height like on desktop */
   }
   .asset_image_container {
-    max-width: 70%;
     display: block;
     margin: 0;
   }
@@ -115,7 +114,6 @@ line-height: 1.2;
 
 @media screen and (max-width: 479px) { 
   .asset_image_container {
-    max-width: 65%;
     display: block;
     margin: 0;
   }
@@ -133,14 +131,16 @@ line-height: 1.2;
   position: fixed;
   right: 3%;
   top: 0;
-  height: 75%;
-  width: 120px;
+  height: 80%;
+  width: 20%;
   overflow-y: auto;
   overflow-x: hidden;
   -webkit-perspective: 1000;
   perspective: 1000;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
 .gallery_thumbs.is_loading {
@@ -156,7 +156,7 @@ line-height: 1.2;
   padding: 0 0 15px 0;
   font-size: 12px;
   line-height: 12px;
-  opacity: 0.1;
+  opacity: 1;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=10)";
 }
 
@@ -205,8 +205,8 @@ line-height: 1.2;
   width: 100%;
 }
 
-@media screen and (max-width: 479px) { 
+@media screen and (max-width: 767px) { 
   .gallery_thumbs {
-    height: 70%;
+    width: 40%;
   }
 }
