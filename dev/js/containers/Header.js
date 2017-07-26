@@ -13,6 +13,10 @@ class Header extends Component {
 
 	}
 
+    componentDidMount() {
+        
+    }
+
 	goBackHome() {
 		// go back home
 	}
@@ -31,40 +35,7 @@ class Header extends Component {
                 'id': 'portfolio',
                 'icon': 'glyphicon glyphicon-triangle-bottom',
                 'hasDropDown': true,
-                'nestedItems': [
-                    {
-                        name: 'Places',
-                        to: '/portfolio/places'
-                    },
-                    {
-                        name: 'People',
-                        to: '/portfolio/people'
-                    },
-                    {
-                        name: 'Nature',
-                        to: '/portfolio/nature'
-                    },
-                    {
-                        name: 'Wild Life',
-                        to: '/portfolio/wild-life'
-                    },
-                    {
-                        name: 'Cars',
-                        to: '/portfolio/cars'
-                    },
-                    {
-                        name: 'Devotional',
-                        to: '/portfolio/devotional'
-                    },
-                    {
-                        name: 'Marriage',
-                        to: '/portfolio/marriage'
-                    },
-                    {
-                        name: 'Others',
-                        to: '/portfolio/others'
-                    }
-                ]
+                'nestedItems': this.props.gallery || []
             },
             
             {

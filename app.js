@@ -5,16 +5,20 @@ const path = require('path');
 const favicon = require('serve-favicon');
 const compression = require('compression');
 
+const gallery = require('./routes/gallery');
 const app = express();
 
 app.use(compression());  
 app.use(express.static('src'));  
 app.use(favicon(path.join(__dirname,'src','favicon.ico')));
 
+// for all gallery API routings
+app.all(/Gallery/, gallery);
+
+// for all basic routings
 app.get('*', function(req, res) {  
   res.sendFile(path.join(__dirname, 'src', 'index.html'));
 });
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

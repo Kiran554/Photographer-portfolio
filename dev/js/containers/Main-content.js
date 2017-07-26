@@ -12,7 +12,6 @@ import {
   Link
 } from 'react-router-dom';
 
-console.log(process.env.NODE_ENV);
 class MainContent extends Component {
 
 	constructor(props) {
@@ -27,7 +26,6 @@ class MainContent extends Component {
 		  /[a-zA-Z0-9]+.(png|jpg|jpeg)/.test(file)
 		).map(file => imagesFolder+file);
 		//console.log(this.imageList);
-		console.log(this.props);
 	}
 
 	componentDidMount() {
@@ -42,7 +40,7 @@ class MainContent extends Component {
 
 		return (
 			<main className="mainContent">
-				<Route location={location} key={location.key} exact path="/" render={(props)=> <Home images={this.imageList} {...props}/>}/>
+				<Route location={location} key={location.key} exact path="/" render={(props)=> <Home images={this.props.gallery} {...props}/>}/>
 				<Route location={location} key={location.key}  path="/portfolio/:portfolioId" render={(props)=> <Portfolio images={this.imageList} {...props}/>}/>
 		      	<Route location={location} key={location.key}  path="/contact" component={Contact}/>
 				{/*<RouteTransition 

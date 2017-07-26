@@ -287,6 +287,13 @@ $default-bg-color: rgba(17,17,17,1);
 		&__list {
 			margin: auto !important;
 		}
+
+		&__item-caption {
+			padding: 10px 0 0 0;
+			text-align: center;
+			text-transform: uppercase;
+			color: #ccc;
+		}
 	}
 
 	.portfolio {
@@ -349,6 +356,14 @@ $default-bg-color: rgba(17,17,17,1);
 			&--hide {
 				margin-bottom: -100%;
 			}
+		}
+	}
+
+	.contact {
+
+		&__photo {
+			border-radius: 25%;
+    		margin-bottom: 10px;
 		}
 	}
 }

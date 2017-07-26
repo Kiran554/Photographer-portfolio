@@ -1,14 +1,45 @@
 import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
+import CommunicationService from 'services/CommunicationService';
 
 class Contact extends Component {
 
-	componentWillMount() {
+	constructor(props) {
+		super();
+		this.state = {contactImage: null};
+		this.type = 'profile';
+	} 
 
+	componentWillMount() {
+		// start the spinner
+		CommunicationService.get(`/fetchGallery.action?type=${this.type}`).then( data => {
+			if(!data) throw new Error('No Data available!!')
+			let result = JSON.parse(data);
+			return this.mapGalleryResponse(result.resources);			
+		}).then( (response) => {
+			console.log(response);
+			this.setState({contactImage: response[0]});
+		}).catch( (error) => {
+			console.error('Failed!!', error);
+		}).then( () => {
+			// close the spinner
+		})
 	}
 
 	componentDidMount() {
+	}
+
+	mapGalleryResponse(response) {
+		let viewPort = CommunicationService.getViewportDimensions(this.type);
+
+		return response.map( (value, index) => {
+            let width = viewPort.width < value.width ? viewPort.width : value.width
+            let height = viewPort.height < value.height ? viewPort.height : value.height
+            let src = `http://res.cloudinary.com/sharathmodumpally/image/upload/c_thumb,g_center,h_${height},w_${width}/v${value.version}/${value.public_id}.${value.format}`;
+
+			return $.extend(true, value, {width, height, src});
+		});
 	}
 
 	render() {
@@ -20,8 +51,8 @@ class Contact extends Component {
 							<div className="col-sm-8 col-xs-12 contact__left-col no-padding">
 								<div className="conatiner">
 									<div className="row contact__left-row no-margin">
-										<div className="col-sm-6 col-xs-12 no-padding">
-											<img className="contact_photo" src="http://res.cloudinary.com/sharathmodumpally/image/upload/w_150,h_100,c_fill/sample.jpg"/>
+										<div className="col-sm-6 col-xs-12 no-padding text-center">
+											{this.state.contactImage && <img className="contact__photo" src={this.state.contactImage.src} alt={this.state.contactImage.public_id}/>}
 										</div>
 										<div className="col-sm-6 col-xs-12 no-padding">
 											<p className="contact__into">

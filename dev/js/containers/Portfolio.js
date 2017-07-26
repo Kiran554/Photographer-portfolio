@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
+import CommunicationService from 'services/CommunicationService';
 import 'lib/Plugins';
 import 'lib/Gallery';
 
@@ -10,18 +11,60 @@ class Portfolio extends Component {
 
 	constructor(props) {
 		super();
-		this.state = {toggleGallery: false};
+		this.state = {toggleGallery: false, gallery: []};
+		this.type = props.match.params.portfolioId;
 	}
 
 	componentWillMount() {
-
+		this.getPortfolioImages();
 	}
 
 	componentDidMount() {
-		Gallery.cache_assets_dom_elements();
-		Gallery.size_assets();
-		Gallery.init.call(Gallery);
-        Thumbs.init();
+	}
+
+	componentWillUpdate() {
+	}
+
+	componentDidUpdate() {
+		if(this.type !== this.props.match.params.portfolioId) {
+			this.type = this.props.match.params.portfolioId;
+			this.getPortfolioImages();
+		} else {
+			Gallery.cache_assets_dom_elements();
+			Gallery.size_assets();
+			Gallery.init.call(Gallery);
+	        Thumbs.init();
+	    }
+	}
+
+	getPortfolioImages() {
+		// start the spinner
+		CommunicationService.get(`/fetchGallery.action?type=${this.type}`).then( data => {
+			let result = JSON.parse(data);
+			return this.mapGalleryResponse(result.resources);			
+		}).then( (response) => {
+			console.log(response);
+			this.setState({gallery: response});
+		}).catch( (error) => {
+			console.error('Failed!!', error);
+		}).then( () => {
+			// close the spinner
+		})
+	}
+
+	mapGalleryResponse(response) {
+		let viewPort = CommunicationService.getViewportDimensions(this.type);
+		let thumbnailViewPort = CommunicationService.getViewportDimensions('thumbnail');
+
+		return response.map( (value, index) => {
+            let width = viewPort.width < value.width ? viewPort.width : value.width
+            let height = viewPort.height < value.height ? viewPort.height : value.height
+            let crop = 'fit';
+            let src = `http://res.cloudinary.com/sharathmodumpally/image/upload/c_${crop},h_${height},w_${width}/v${value.version}/${value.public_id}.${value.format}`;
+            let thumbnailSrc = `http://res.cloudinary.com/sharathmodumpally/image/upload/c_thumb,g_center,h_${thumbnailViewPort.height},w_${thumbnailViewPort.width}/v${value.version}/${value.public_id}.${value.format}`;
+
+			return $.extend(true, value, {width, height, crop, src, thumbnailSrc});
+		});
 	}
 
 	constructGallery() {
@@ -31,8 +74,8 @@ class Portfolio extends Component {
 						].join(' ').trim();
 		return (
 			<div id="content" className={className}>
-				{this.props.images.map((image, index) => {
-					let isLastItem = ((index + 1) === this.props.images.length);
+				{this.state.gallery && this.state.gallery.map((image, index) => {
+					let isLastItem = ((index + 1) === this.state.gallery.length);
 					let anchorTags = {};
 					anchorTags.className = `asset_image_container`;
 					if(!isLastItem) anchorTags.href = `#no${index+2}`;
@@ -41,7 +84,7 @@ class Portfolio extends Component {
 						<article className="asset image" id={`no${index+1}`} key={`gallery-${index}`}>
 				          	<div className="asset_center">
 				            	<a {...anchorTags}>
-				              		<img className="js_lazyload" src={image} alt={image.split('.')[0]}/>
+				              		<img className="js_lazyload" src={image.src} alt={image.public_id}/>
 				            	</a>
 				          	</div>
 				        </article>
@@ -59,11 +102,11 @@ class Portfolio extends Component {
 						].join(' ').trim();
 		return (
 			<ul className={className} onClick={this.toggleGallery.bind(this, false)}>
-				{this.props.images.map((image, index) => {
+				{this.state.gallery && this.state.gallery.map((image, index) => {
 					return (
 						<li className="gallery_thumb image is_selected" key={`gallery-thumbnail-${index}`} id={`thumb${index+1}`}>
 				        	<a href={`#no${index+1}`}>
-				        		<img className="js_lazyload" src={image} alt={image.split('.')[0]}/>
+				        		<img className="js_lazyload" src={image.src} alt={image.public_id}/>
 			        		</a>
 				        </li>
 			        );
@@ -101,7 +144,6 @@ class Portfolio extends Component {
 
 	}
 
-	//<h1>{this.props.match.params.portfolioId}</h1>
 	render() {
 		return (
 			<div className="portfolio" >

@@ -17,31 +17,46 @@ class Home extends Component {
 	}
 
 	componentWillMount() {
-		console.log(this.props);
 	}
 
 	componentDidMount() {
+	}
+
+	componentDidUpdate() {
 		new AnimOnScroll( document.getElementById( 'grid' ), {
-				minDuration : 0.1,
-				maxDuration : 0.7,
-				viewportFactor : 0.2
-			} );
+			minDuration : 0.1,
+			maxDuration : 0.7,
+			viewportFactor : 0.2
+		} );
 	}
 
 	constructImages() {
-		return this.props.images.map((image, index) =>
-				<li key={`image-${index}`}><Link to="/portfolio/places"><img src={image}/></Link></li>
-			);
+		return (
+			<ul className="grid effect-3 home__list" id="grid">
+                {
+                    this.props.images.map( data => {
+                        return (
+                            <li className="home__list-item" key={data.public_id}>
+                                <Link to={data.to}>
+                                    <img src={data.src} alt={data.public_id}/>
+                                </Link>
+                                <div className="home__item-caption">
+                                	<span> {data.name} </span>
+                                </div>
+                            </li>
+                        )
+                    })
+                }
+            </ul>
+        );
 	}
 
 	render() {
 		return (
 			<div className="home">
-				<ul className="grid effect-3 home__list" id="grid">
-					{this.constructImages()}
-				</ul>
+				{this.props.images && this.constructImages()}
 			</div>
-		)
+		);
 	}
 }
 
